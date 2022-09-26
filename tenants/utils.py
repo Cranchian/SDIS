@@ -1,3 +1,4 @@
+from re import sub
 from .models import Tenant
 from django.db import connection
 
@@ -9,6 +10,7 @@ def hostname_from_request(request):
 def tenant_from_request(request):
     hostname = hostname_from_request(request)
     subdomain_prefix = hostname.split('.')[0]
+    print(subdomain_prefix)
     return Tenant.objects.filter(subdomain_prefix=subdomain_prefix).first()
 
 def get_tenants_map():
